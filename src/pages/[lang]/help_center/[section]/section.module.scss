@@ -1,0 +1,265 @@
+@use "../../../../styles/mixins";
+@use "../../../../styles/function" as *;
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 500px;
+  margin: 118px 16px 0;
+
+  @media (min-width: 1272px) {
+    margin-left: calc(50% - 620px);
+  }
+
+  aside {
+    display: none;
+  }
+
+  @include mixins.respond-to-medium {
+    flex-direction: row;
+    max-width: 1160px;
+    margin-top: 0;
+
+    aside {
+      display: flex;
+      flex: 0 1 240px;
+    }
+
+    main {
+      flex: 0 2 750px;
+      margin-left: 1rem;
+      padding-top: 160px;
+    }
+  }
+}
+
+.scroll {
+  margin-bottom: 40px;
+
+  @include mixins.respond-to-medium {
+    position: sticky;
+    top: 0;
+    height: min-content;
+    max-height: 100vh;
+    margin-bottom: 0;
+    padding-top: 160px;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.current {
+  @include mixins.respond-to-medium {
+    color: rgb(0 0 0);
+    font-weight: 500;
+  }
+}
+
+.menu {
+  display: grid;
+  gap: calc-clamp(1rem, 1.5rem);
+  margin-bottom: 16px;
+  color: rgb(104 104 104);
+  font-size: calc-clamp(1rem, 1.25rem);
+  line-height: 1.3;
+
+  @supports not (font-size: clamp(1px, 1vw, 2px)) {
+    gap: 1rem;
+    font-size: 1rem;
+
+    @include mixins.respond-to-medium {
+      gap: 1.5rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  li {
+    position: relative;
+  }
+}
+
+.articles {
+  display: grid;
+
+  li {
+    padding: 30px 0;
+    border-bottom: 1px solid rgb(233 233 233);
+
+    @include mixins.respond-to-medium {
+      border: none;
+    }
+  }
+
+  li:first-child {
+    padding-top: 0;
+  }
+
+  li:last-child {
+    padding-bottom: 0;
+    border: none;
+  }
+
+  @supports not (font-size: clamp(1px, 1vw, 2px)) {
+    row-gap: 2.5rem;
+
+    @include mixins.respond-to-medium {
+      row-gap: 3.75rem;
+    }
+  }
+}
+
+.article {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  h2 {
+    max-width: calc(100% - 38px);
+    font-weight: 600;
+    font-size: calc-clamp(1.5rem, 2rem);
+    line-height: 1.1;
+
+    @include mixins.respond-to-medium {
+      max-width: 100%;
+    }
+
+    @supports not (font-size: clamp(1px, 1vw, 2px)) {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+
+      @include mixins.respond-to-medium {
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  div {
+    color: rgb(104 104 104);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3;
+
+    @include mixins.respond-to-medium {
+      font-size: 1.25rem;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+.button {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  @include mixins.respond-to-medium {
+    display: none;
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: calc(50% - 8px);
+    display: block;
+    width: 16px;
+    height: 2px;
+    background-color: rgb(0 0 0);
+    content: "";
+
+    @include mixins.motion {
+      transition: 0.25s;
+    }
+
+    @include mixins.respond-to-medium {
+      display: none;
+    }
+  }
+
+  &::before {
+    transform: rotate(90deg);
+  }
+
+  @include mixins.motion {
+    transition: all 0.3s ease;
+  }
+
+  .active & {
+    background: rgb(233 233 233);
+
+    &::before {
+      background-color: rgb(233 233 233);
+
+      @include mixins.motion {
+        transition: 0.25s;
+      }
+    }
+  }
+}
+
+.body {
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+
+  @include mixins.motion {
+    transition: all 0.3s ease;
+  }
+
+  @include mixins.respond-to-medium {
+    max-height: none;
+    margin-top: 1.5rem;
+    overflow: visible;
+  }
+
+  .active & {
+    margin-top: 30px;
+
+    @include mixins.respond-to-medium {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+.link {
+  position: absolute;
+  top: -118px;
+
+  @include mixins.respond-to-medium {
+    position: absolute;
+    top: -155px;
+  }
+}
+
+.anchor {
+  position: absolute;
+  top: -160px;
+  bottom: 0;
+  height: calc(100% + 160px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+}
