@@ -38,7 +38,9 @@ const SectionSecure = () => {
 							<a href="https://github.com/tangem" target="_blank" rel="nofollow noopener noreferrer">
 								<img width="24" height="24" src='/svg/github-repo.svg' alt='GitHub'/>
 							</a>
-							<span>GitHub</span>
+              <a href="https://github.com/tangem" target="_blank" rel="nofollow noopener noreferrer">
+                GitHub
+              </a>
 						</div>
 					</div>
 				</div>
