@@ -11,7 +11,7 @@ const SectionHero = () => {
 	const {toggle} = useContext(BuyContext);
   const {language} = i18next;
 
-  const imgLocale = ['ru', 'by'].includes(language) ? 'ru' : 'en';
+  const imgLocale = 'en'; // ['ru', 'by'].includes(language) ? 'ru' : 'en';
 
 	return (
 		<section className={styles.hero}>
